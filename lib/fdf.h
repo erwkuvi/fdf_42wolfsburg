@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 16:04:49 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:02:52 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ typedef struct s_data
 	int		y2;
 	int		shift_x;
 	int		shift_y;
+	// float	dx;
+	// float	dy;
 
-	int		zoom;
-	int		height_zoom;
+	float		zoom;
+	float		height_zoom;
 	int		color;
 	float	angle;
 	int		**color_matrix;
@@ -97,7 +99,7 @@ void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 
 /* ---------draw.c ----------------- */
-void		bresen_algo(t_data *data, int color);
+void		bresenham_line(t_data *data, int color);
 void		img_pix_put(t_img *img, int x, int y, int color);
 void		ft_draw(t_data *data);
 void		ft_zoom(t_data *data);

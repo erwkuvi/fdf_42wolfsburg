@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:44:05 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 16:59:22 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:23:55 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-static int	x_isometric(int x, int y, t_data *data)
+static int	x_isometric(float x, float y, t_data *data)
 {
-	// return ((x - y) * cos(data->angle));
-	y = 0;
-	data->color_matrix = NULL;
-	return (x);
+	return ((x - y) * cos(data->angle));
+	// y = 0;
+	// data->color_matrix = NULL;
+	// return (x);
 }
 
 static int	y_isometric(int x, int y, int z, t_data *data)
 {
-	// return ((x + y) * sin(data->angle) - z);
-	x = 0;
-	z = 0;
-	data->color_matrix = NULL;
-	return (y);
+	return ((x + y) * sin(data->angle) - z);
+	// x = 0;
+	// z = 0;
+	// data->color_matrix = NULL;
+	// return (y);
 }
 
 // void	isometric(int *x, int *y, int z, t_data *data)
@@ -64,7 +64,7 @@ void	assign_val_x(t_data *data, int x1, int y1)
 	data->y1 = y_isometric(data->x1, y1, z1, data);
 	data->x2 = x_isometric(x2, y2, data);
 	data->y2 = y_isometric(data->x2, y2, z2, data);
-	bresen_algo(data, color);
+	bresenham_line(data, color);
 }
 
 void	assign_val_y(t_data *data, int x1, int y1)
@@ -91,5 +91,5 @@ void	assign_val_y(t_data *data, int x1, int y1)
 	data->y1 = y_isometric(data->x1, y1, z1, data);
 	data->x2 = x_isometric(x2, y2, data);
 	data->y2 = y_isometric(data->x2, y2, z2, data);
-	bresen_algo(data, color);
+	bresenham_line(data, color);
 }

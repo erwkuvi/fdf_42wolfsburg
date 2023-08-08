@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:45:32 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 17:15:02 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:31:06 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,43 @@ void	loop_x(t_data *data, int dx, int dy, int color)
 	}
 }
 
-void	bresen_algo(t_data *data, int color)
+float	mod(float val)
 {
-	int	dx;
-	int	dy;
-	// int	z1;
-	// int	z2;
+	if (val < 0)
+		return (val * -1);
+	return (val);
+}
 
-	// z1 = data->z_matrix[data->y1][data->x1];
-	// z2 = data->z_matrix[data->y2][data->x2];
-	// ft_zoom(data);
-	// data->color = assign_color(z1);
-	// ft_shift(data);
-	// isometric(&data->x1, &data->y1, z1, data);
-	// isometric(&data->x2, &data->y2, z2, data);
+int	max_val(float dx, float dy)
+{
+	if (dx > dy)
+		return ((int)dx);
+	return ((int)dy);
+
+}
+
+void	bresenham_line(t_data *data, int color)
+{
+	float	dx;
+	float	dy;
+	float	x_pos;
+	float	y_pos;
+	int		max;
+
 	dx = data->x2 - data->x1;
 	dy = data->y2 - data->y1;
-	if (dx >= dy)
-		loop_x(data, dx, dy, color);
-	else
-		loop_y(data, dx, dy, color);
+	max = max_val(mod(dx), mod(dy));
+	dx /= max;
+	dy /= max;
+	x_pos = data->x1;
+	y_pos = data->y1;
+	while ((int)(x_pos - data->x2) || (int)(y_pos - data->y2))
+	{
+		img_pix_put(&data->img, (data->shift_x + (int)x_pos),
+			(data->shift_y + (int)y_pos), color);
+		x_pos += dx;
+		y_pos += dy;
+	}
 }
 
 void	ft_draw(t_data *data)

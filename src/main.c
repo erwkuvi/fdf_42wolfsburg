@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:33:37 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 14:13:24 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:42:27 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ void	ft_fdf(char *argv)
 	readfile(argv, data);
 	initialize_mlx(data);
 	initialize(data);
+	render_background(&data->img, EBONY);
 	ft_draw(data);
 	// mlx_loop_hook(data->mlx_ptr, ft_draw, data);
 	// mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->img.img_ptr, 0, 0);
 	mlx_hook(data->win_ptr, WINDOW_CLOSE, 0, &cleanup, data);
 	mlx_hook(data->win_ptr, 2, 0, &deal_key, data);
 	mlx_loop(data->mlx_ptr);
