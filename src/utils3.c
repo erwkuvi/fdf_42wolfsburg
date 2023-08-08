@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:53:11 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/02 10:59:53 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 16:05:10 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	initialize(t_data *data)
 	data->zoom = WIN_HEIGHT / data->height / 4;
 	if (data->zoom <= 0)
 		error_print("Error while calculating zoom!");
+	data->height_zoom = 3;
 	data->color = WHITE;
-	data->anglex = 0.523599;
-	data->angley = 0.523599;
+	data->angle = 0.523599;
 	data->shift_x = (WIN_WIDTH / 2) - (data->width * data->zoom) / 2;
 	data->shift_y = (WIN_HEIGHT / 2) - (data->height * data->zoom) / 2;
 	if (data->shift_x < 0 || data->shift_y < 0)
 		error_print("Error while calculating offset!");
+	data->color_matrix = NULL;
 }
 
 void	render_background(t_img *img, int color)

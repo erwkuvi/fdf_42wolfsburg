@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/04 18:14:45 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 16:04:49 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ typedef struct s_data
 	int		zoom;
 	int		height_zoom;
 	int		color;
-	float	anglex;
-	float	angley;
+	float	angle;
 	int		**color_matrix;
 
 	void	*mlx_ptr;
@@ -94,6 +93,8 @@ void		ft_zoom(t_data *data);
 void		initialize_mlx(t_data *data);
 void		initialize(t_data *data);
 void		ft_shift(t_data *data);
+void		assign_val_x(t_data *data, int x, int y);
+void		assign_val_y(t_data *data, int x, int y);
 
 /* ---------draw.c ----------------- */
 void		bresen_algo(t_data *data, int color);

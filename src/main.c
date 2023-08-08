@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:33:37 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/01 17:24:22 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/08 14:13:24 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_fdf(char *argv)
 	mlx_hook(data->win_ptr, 2, 0, &deal_key, data);
 	mlx_loop(data->mlx_ptr);
 }
-
 
 int	main(int argc, char **argv)
 {
