@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 21:02:52 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/09 18:12:36 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,18 @@
 
 # define MLX_ERROR		1
 # define KY_ESC			53
-# define UP				126
-# define DOWN			125
-# define LEFT			123
-# define RIGHT			124
+# define UP				12
+# define DOWN			1
+# define LEFT			0
+# define RIGHT			2
+# define ZOOMIN			40
+# define ZOOMOUT		44
 # define WINDOW_CLOSE	17
+# define KEY_PRESS		2
+# define ARR_UP			126
+# define ARR_DOWN		125
+# define ARR_LEFT		123
+# define ARR_RIGHT		124
 
 
 /*W = 13 A = 0  S = 1 Q = 12*/
@@ -61,8 +68,8 @@ typedef struct s_data
 	// float	dx;
 	// float	dy;
 
-	float		zoom;
-	float		height_zoom;
+	float	zoom;
+	float	height_zoom;
 	int		color;
 	float	angle;
 	int		**color_matrix;
@@ -72,22 +79,13 @@ typedef struct s_data
 	t_img	img;
 }	t_data;
 
-typedef struct s_rect
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-	int	color;
-}	t_rect;
-
 /* ----------- readfile.c -------------- */
 void		readfile(char *filename, t_data *data);
 void		error_print(char *s);
 int			get_y(char *filename);
 int			get_x(char *filename);
 
-/* ---------utils.c ----------------- */
+/* --------- utils.c ----------------- */
 int			ft_wordcount(char *s, char c);
 void		free_int_array(int **array);
 int			assign_color(int z);
@@ -98,19 +96,22 @@ void		ft_shift(t_data *data);
 void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 
-/* ---------draw.c ----------------- */
+/* --------- draw.c ----------------- */
 void		bresenham_line(t_data *data, int color);
 void		img_pix_put(t_img *img, int x, int y, int color);
 void		ft_draw(t_data *data);
 void		ft_zoom(t_data *data);
 void		ft_shift(t_data *data);
 void		render_background(t_img *img, int color);
-// int			render_rect(t_img *img, t_rect rect);
 
-/*----------isometric.c---------------*/
-void		isometric(int *x, int *y, int z, t_data *data);
+/*--------- isometric.c --------------*/
 void		assign_val_x(t_data *data, int val1, int val2);
 void		assign_val_y(t_data *data, int val1, int val2);
+
+/*--------- hooks.c ----------------*/
+int			cleanup(t_data *data);
+int			deal_key(int key, t_data *data);
+int			close_win(t_data *data);
 
 #endif
 

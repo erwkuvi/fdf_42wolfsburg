@@ -3,45 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:33:37 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 21:42:27 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/09 13:53:00 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-int	cleanup(t_data *data)
-{
-	if (data->img.img_ptr)
-		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-	if (data->win_ptr)
-		mlx_destroy_window(data->mlx_ptr, data->img.img_ptr);
-	// free(data->mlx_ptr);
-	if (data->z_matrix)
-		free_int_array(data->z_matrix);
-	free(data);
-	exit(0);
-}
-
-int	deal_key(int key, t_data *data)
-{
-	// printf("%d\n", key);
-	// mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	if (key == UP)
-		data->shift_y -= 10;
-	if (key == DOWN)
-		data->shift_y += 10;
-	if (key == LEFT)
-		data->shift_x -= 10;
-	if (key == RIGHT)
-		data->shift_x += 10;
-	if (key == KY_ESC)
-		return (cleanup(data));
-	ft_draw(data);
-	return (0);
-}
 
 void	ft_fdf(char *argv)
 {
@@ -55,10 +25,11 @@ void	ft_fdf(char *argv)
 	ft_draw(data);
 	// mlx_loop_hook(data->mlx_ptr, ft_draw, data);
 	// mlx_key_hook(data->win_ptr, deal_key, data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->img.img_ptr, 0, 0);
-	mlx_hook(data->win_ptr, WINDOW_CLOSE, 0, &cleanup, data);
-	mlx_hook(data->win_ptr, 2, 0, &deal_key, data);
+
+	mlx_hook(data->win_ptr, KEY_PRESS, 0, &deal_key, data);
+	mlx_hook(data->win_ptr, WINDOW_CLOSE, (1L << 17), &close_win, data);
+	// mlx_hook(data->win_ptr, 4, 0, &mouse_press, data);
+	//int mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct)(), void *param);
 	mlx_loop(data->mlx_ptr);
 }
 

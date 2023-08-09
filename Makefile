@@ -6,7 +6,7 @@
 #    By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 20:42:34 by ekuchel           #+#    #+#              #
-#    Updated: 2023/08/08 13:42:45 by ekuchel          ###   ########.fr        #
+#    Updated: 2023/08/09 13:28:19 by ekuchel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRC =	./src/main.c \
 		./src/utils3.c \
 		./src/readfile.c \
 		./src/draw.c \
-		./src/isometric.c
+		./src/isometric.c \
+		./src/hooks.c \
 
 # tester.c
 
