@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:33:37 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/13 11:32:09 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/14 12:26:45 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_fdf(argv[1]);
-
+	printf("atoi_base = %d\n", hextoint("FF0000"));
+	printf("atoi_base = %d\n", atoi_base("FF0000", HEXADEC));
 	return (0);
 }

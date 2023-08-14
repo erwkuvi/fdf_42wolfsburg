@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:45:32 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/12 22:23:11 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/14 12:30:52 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	loop_x(t_data *data, int dx, int dy, int color)
 		p += p_factor(p, dx, dy, &data->y1);
 		img_pix_put(&data->img, (data->shift_x + data->x1++),
 			(data->shift_y + data->y1), color);
-
 	}
 }
 
@@ -64,7 +63,6 @@ int	max_val(float dx, float dy)
 	if (dx > dy)
 		return ((int)dx);
 	return ((int)dy);
-
 }
 
 void	bresenham_line(t_data *data, int color)

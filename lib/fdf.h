@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/13 11:31:40 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/14 12:26:06 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define GREY			0x808080
 # define BLUE			0x0000FF
 # define MAROON			0x800000
+# define HEXADEC		16
 
 typedef struct s_img
 {
@@ -81,6 +82,8 @@ void		readfile(char *filename, t_data *data);
 void		error_print(char *s);
 int			get_y(char *filename);
 int			get_x(char *filename, int y);
+int			atoi_base(char *str, int base);
+int			hextoint(const char *str);
 
 /* --------- utils.c ----------------- */
 int			ft_wordcount(char *s, char c);

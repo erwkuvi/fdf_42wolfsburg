@@ -1,27 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   atoi_base.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 13:26:43 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/14 12:43:51 by ekuchel          ###   ########.fr       */
+/*   Created: 2023/08/14 11:03:27 by ekuchel           #+#    #+#             */
+/*   Updated: 2023/08/14 12:58:23 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Desc: converts the initial portion of the string pointed to by
-str to int representation.:*/
+#include "../lib/fdf.h"
 
-int	ft_atoi(const char *str)
+int	get_digit(char c, int base, int *digit)
 {
-	int	i;
-	int	res;
-	int	posneg;
+	char	*base_str;
+	int		i;
 
-	posneg = 1;
+	base_str = "0123456789abcdef";
+	i = 0;
+	while (base_str[i])
+	{
+		if (base_str[i] == c)
+			break ;
+		i++;
+	}
+	if (i >= base)
+		return (0);
+	*digit = i;
+	return (1);
+}
+
+int	atoi_base(char *str, int base)
+{
+	int	res;
+	int	digit;
+	int	posneg;
+	int	i;
+
 	i = 0;
 	res = 0;
+	posneg = 1;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -30,11 +49,13 @@ int	ft_atoi(const char *str)
 			posneg *= -1;
 		i++;
 	}
-	while (str[i] >= 48 && str[i] <= 57)
+	while ((get_digit(ft_tolower(str[i]), base, &digit)))
 	{
-		res *= 10;
-		res = res + (str[i] - '0');
+		res *= base;
+		res += (digit % base);
 		i++;
 	}
+	if (str[i] != ' ' && str[i] != ',' && str[i] != '\0' && str[i] != '\n')
+		error_print("Error: Map contains invalid non-digit characters j");
 	return (res * posneg);
 }

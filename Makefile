@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+         #
+#    By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 20:42:34 by ekuchel           #+#    #+#              #
-#    Updated: 2023/08/12 11:18:42 by ekuchel          ###   ########.fr        #
+#    Updated: 2023/08/14 11:25:51 by ekuchel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC =	./src/main.c \
 		./src/draw.c \
 		./src/isometric.c \
 		./src/hooks.c \
+		./src/atoi_base.c \
 
 # tester.c
 
