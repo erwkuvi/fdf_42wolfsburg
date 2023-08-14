@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:25:14 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/01 12:54:24 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/13 21:07:43 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
+
+void	ft_allocation_matrices(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->z_matrix = (int **)ft_calloc(data->height, sizeof(int *));
+	data->color_matrix = (int **)ft_calloc(data->height, sizeof(int));
+	if (!data->z_matrix || !data->color_matrix)
+		error_print("Matrix was not memory allocated");
+	while (i < data->height)
+	{
+		data->z_matrix[i] = (int *)ft_calloc(data->width, sizeof(int));
+		i++;
+	}
+
+}
 
 int	get_y(char *filename)
 {
@@ -31,18 +48,29 @@ int	get_y(char *filename)
 	return (counter);
 }
 
-int	get_x(char *filename)
+int	get_x(char *filename, int y)
 {
 	int		fd;
 	char	*line;
 	int		counter;
+	int		*sizecheck;
+	int		i;
 
-	counter = 0;
+	i = 0;
+	sizecheck = (int *)malloc(sizeof(int) * y);
 	fd = open(filename, O_RDONLY, 0);
 	if (fd < 0)
 		error_print("open function failed");
-	get_next_line(fd, &line);
-	counter = ft_wordcount(line, ' ');
+	while (get_next_line(fd, &line))
+	{
+		counter = ft_wordcount(line, ' ');
+		sizecheck[i] = counter;
+		if (arraycmp(sizecheck, sizecheck[i], i))
+			error_print("Map size error");
+		free(line);
+		i++;
+	}
+	free(sizecheck);
 	free(line);
 	close(fd);
 	return (counter);
@@ -66,29 +94,24 @@ void	populate_matrix(char *line, int	*line_matrix)
 
 void	readfile(char *filename, t_data *data)
 {
-	int		i;
-	int		fd;
-	char	*line;
+	// int		fd;
+	// char	*line;
 
-	fd = open(filename, O_RDONLY, 0);
-	if (fd < 0)
-		error_print("open function failed");
+	// fd = open(filename, O_RDONLY, 0);
+	// if (fd < 0)
+	// 	error_print("open function failed");
 	data->height = get_y(filename);
-	data->width = get_x(filename);
-	data->z_matrix = (int **)malloc(data->height * sizeof(int *));
-	i = 0;
-	while (i < data->height)
-	{
-		data->z_matrix[i] = (int *)malloc(data->width * sizeof(int));
-		i++;
-	}
-	i = 0;
-	while (get_next_line(fd, &line))
-	{
-		populate_matrix(line, data->z_matrix[i]);
-		free(line);
-		i++;
-	}
-	close(fd);
+	printf("Value of Y: %d\n", data->height);
+	data->width = get_x(filename, data->height);
+	printf("Value of X: %d\n", data->width);
+	ft_allocation_matrices(data);
+	// i = 0;
+	// while (get_next_line(fd, &line))
+	// {
+	// 	populate_matrix(line, data->z_matrix[i]);
+	// 	free(line);
+	// 	i++;
+	// }
+	// close(fd);
 	return ;
 }

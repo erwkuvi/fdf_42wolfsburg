@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+         #
+#    By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 20:42:34 by ekuchel           #+#    #+#              #
-#    Updated: 2023/08/09 13:28:19 by ekuchel          ###   ########.fr        #
+#    Updated: 2023/08/12 11:18:42 by ekuchel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC =	./src/main.c \
 		./src/utils.c \
 		./src/utils2.c \
 		./src/utils3.c \
+		./src/utils4.c \
 		./src/readfile.c \
 		./src/draw.c \
 		./src/isometric.c \

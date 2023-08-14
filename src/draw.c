@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:45:32 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 21:31:06 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/12 22:23:11 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	bresenham_line(t_data *data, int color)
 	}
 }
 
-void	ft_draw(t_data *data)
+int	ft_draw(t_data *data)
 {
 	int	y;
 	int	x;
@@ -118,4 +118,5 @@ void	ft_draw(t_data *data)
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img_ptr, 0, 0);
+	return (0);
 }
