@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:53:11 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/12 22:45:04 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:52:05 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	hextoint(const char *str)
 
 	num = 0;
 	i = 0;
-
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
@@ -85,3 +84,32 @@ int	hextoint(const char *str)
 	return (num);
 }
 
+int	hex_color(char *hex)
+{
+	int	length;
+	int	base;
+	int	decimal;
+
+	length = ft_strlen(hex) - 1;
+	base = 1;
+	decimal = 0;
+	while (length >= 0)
+	{
+		if (hex[length] >= '0' && hex[length] <= '9')
+			decimal += (hex[length] - 48) * base;
+		if (hex[length] >= 'A' && hex[length] <= 'F')
+			decimal += (hex[length] - 55) * base;
+		if (hex[length] >= 'a' && hex[length] <= 'f')
+			decimal += (hex[length] - 87) * base;
+		base *= 16;
+		length--;
+	}
+	return (decimal);
+}
+
+int	def_color(int map_value)
+{
+	if (map_value >= 0)
+		return (COLOR1);
+	return (COLOR2);
+}

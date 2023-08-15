@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:03:27 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/14 12:58:23 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/15 14:00:20 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	atoi_base(char *str, int base)
 		res += (digit % base);
 		i++;
 	}
-	if (str[i] != ' ' && str[i] != ',' && str[i] != '\0' && str[i] != '\n')
-		error_print("Error: Map contains invalid non-digit characters j");
+	// if (str[i] != ' ' && str[i] != ',' && str[i] != '\0' && str[i] != '\n')
+	// 	error_print("Error: Map contains invalid non-digit characters j");
 	return (res * posneg);
 }

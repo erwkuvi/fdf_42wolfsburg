@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:33:37 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/14 12:26:45 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:59:30 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_fdf(argv[1]);
-	printf("atoi_base = %d\n", hextoint("FF0000"));
-	printf("atoi_base = %d\n", atoi_base("FF0000", HEXADEC));
+	// printf("atoi_base = %d\n", hextoint("FF0000"));
+	printf("hex to int= %d\n", hextoint("0xFF0000"));
+	printf("hex to int= %d\n", hex_color("0xFF0000"));
+	printf("hex to int= %d\n", atoi_base("0xFF0000", HEXADEC));
+	printf("0 - '0'= %d\n", '9' - 48);
+	printf("'C' - 55= %d\n", 'C' - 55); //7
+	printf("'c' - 87= %d\n", 'c' - 87); //W
 	return (0);
 }

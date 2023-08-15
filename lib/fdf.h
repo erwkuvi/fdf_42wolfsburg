@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/14 12:26:06 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:46:59 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define ARR_LEFT		0
 # define ARR_RIGHT		2
 
+# define COLOR1			0xFFFFFF
+# define COLOR2			0x808080
 # define EBONY			0x555D50
 # define WHITE			0xFFFFFF
 # define GREY			0x808080
@@ -84,6 +86,8 @@ int			get_y(char *filename);
 int			get_x(char *filename, int y);
 int			atoi_base(char *str, int base);
 int			hextoint(const char *str);
+int			def_color(int map_value);
+int			hex_color(char *hex);
 
 /* --------- utils.c ----------------- */
 int			ft_wordcount(char *s, char c);

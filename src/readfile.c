@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:25:14 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/13 21:07:43 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:44:09 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_allocation_matrices(t_data *data)
 	while (i < data->height)
 	{
 		data->z_matrix[i] = (int *)ft_calloc(data->width, sizeof(int));
+		data->color_matrix[i] = (int *)ft_calloc(data->width, sizeof(int));
 		i++;
 	}
 
@@ -76,9 +77,10 @@ int	get_x(char *filename, int y)
 	return (counter);
 }
 
-void	populate_matrix(char *line, int	*line_matrix)
+void	populate_matrix(char *line, int	*line_matrix, int *color_matrix)
 {
 	int		i;
+	int		j;
 	char	**s_array;
 
 	i = 0;
@@ -86,6 +88,13 @@ void	populate_matrix(char *line, int	*line_matrix)
 	while (s_array[i])
 	{
 		line_matrix[i] = ft_atoi(s_array[i]);
+		j = 0;
+		while (s_array[i][j] != ',' && s_array[i][j])
+			j++;
+		if (s_array[i][j++] == ',')
+			color_matrix[i] = hextoint(&s_array[i][j]);
+		else
+			color_matrix[i] = def_color(line_matrix[i]);
 		free(s_array[i]);
 		i++;
 	}
@@ -108,7 +117,7 @@ void	readfile(char *filename, t_data *data)
 	// i = 0;
 	// while (get_next_line(fd, &line))
 	// {
-	// 	populate_matrix(line, data->z_matrix[i]);
+	// 	populate_matrix(line, data->z_matrix[i], data->color_matrix[i]);
 	// 	free(line);
 	// 	i++;
 	// }

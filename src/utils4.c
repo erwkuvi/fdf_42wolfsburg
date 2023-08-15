@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 18:22:57 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/13 11:20:08 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/15 14:33:46 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ int	arraycmp(int *array, int current, int index)
 	return (0);
 }
 
+double percent(int start, int end, int current)
+{
+    double placement;
+    double distance;
+
+    placement = current - start;
+    distance = end - start;
+    return ((distance == 0) ? 1.0 : (placement / distance));
+}
+
 // int	cleanup(t_data *data)
 // {
 // 	if (data->z_matrix)
@@ -63,4 +73,10 @@ int	arraycmp(int *array, int current, int index)
 // 	free_ptr(data->img.addr);
 // 	free_ptr(data);
 // 	exit(0);
-// }
+
+
+
+
+
+
+
