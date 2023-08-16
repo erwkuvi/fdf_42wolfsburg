@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:25:14 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/15 13:44:09 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 16:47:59 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_allocation_matrices(t_data *data)
 	int	i;
 
 	i = 0;
+	printf("inside allocating matrices\n");
 	data->z_matrix = (int **)ft_calloc(data->height, sizeof(int *));
 	data->color_matrix = (int **)ft_calloc(data->height, sizeof(int));
 	if (!data->z_matrix || !data->color_matrix)
@@ -103,24 +104,25 @@ void	populate_matrix(char *line, int	*line_matrix, int *color_matrix)
 
 void	readfile(char *filename, t_data *data)
 {
-	// int		fd;
-	// char	*line;
+	int		i;
+	int		fd;
+	char	*line;
 
-	// fd = open(filename, O_RDONLY, 0);
-	// if (fd < 0)
-	// 	error_print("open function failed");
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error_print("open did not work");
 	data->height = get_y(filename);
 	printf("Value of Y: %d\n", data->height);
 	data->width = get_x(filename, data->height);
 	printf("Value of X: %d\n", data->width);
 	ft_allocation_matrices(data);
-	// i = 0;
-	// while (get_next_line(fd, &line))
-	// {
-	// 	populate_matrix(line, data->z_matrix[i], data->color_matrix[i]);
-	// 	free(line);
-	// 	i++;
-	// }
-	// close(fd);
+	i = 0;
+	while (get_next_line(fd, &line))
+	{
+		populate_matrix(line, data->z_matrix[i], data->color_matrix[i]);
+		free(line);
+		i++;
+	}
+	close(fd);
 	return ;
 }

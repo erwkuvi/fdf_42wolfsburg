@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/15 13:46:59 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:16:02 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		ft_shift(t_data *data);
 void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 int			arraycmp(int *array, int current, int index);
+double		percent(int start, int end, int current);
 
 /* --------- draw.c ----------------- */
 void		bresenham_line(t_data *data, int color);

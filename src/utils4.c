@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 18:22:57 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/15 14:33:46 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:34:23 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ double percent(int start, int end, int current)
     distance = end - start;
     return ((distance == 0) ? 1.0 : (placement / distance));
 }
+
 
 // int	cleanup(t_data *data)
 // {

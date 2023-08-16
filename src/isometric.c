@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:44:05 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/08 21:23:55 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:11:45 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	assign_val_x(t_data *data, int x1, int y1)
 	z1 = data->z_matrix[y1][x1];
 	z2 = data->z_matrix[y2][x2];
 	// color = data->color_matrix[y1][x1];
-	color = WHITE;
+	color = 0x800000;
 	x1 *= data->zoom;
 	y1 *= data->zoom;
 	x2 *= data->zoom;
@@ -80,7 +80,7 @@ void	assign_val_y(t_data *data, int x1, int y1)
 	z1 = data->z_matrix[y1][x1];
 	z2 = data->z_matrix[y2][x2];
 	// color = data->color_matrix[y1][x1];
-	color = MAROON;
+	color = 8388608;
 	x1 *= data->zoom;
 	y1 *= data->zoom;
 	x2 *= data->zoom;

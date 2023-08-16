@@ -6,7 +6,7 @@
 #    By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 20:42:34 by ekuchel           #+#    #+#              #
-#    Updated: 2023/08/14 11:25:51 by ekuchel          ###   ########.fr        #
+#    Updated: 2023/08/16 16:50:04 by ekuchel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LIBFT = ./lib/libft/libft.a
 
 LIBMLX = ./lib/minilibx_macos/libmlx.a
 
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -Wall -Werror #-Wextra #-fsanitize=address
 RM = rm -rf
 CC = gcc -g
 

@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:45:32 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/14 12:30:52 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:48:09 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,16 @@ void	bresenham_line(t_data *data, int color)
 	float	x_pos;
 	float	y_pos;
 	int		max;
+	double	percentage;
 
 	dx = data->x2 - data->x1;
 	dy = data->y2 - data->y1;
+
+	if (dx > dy)
+		percentage = percent(data->x1, data->x2, x_pos);
+	else
+		percentage = percent(data->y1, data->y2, y_pos);
+
 	max = max_val(mod(dx), mod(dy));
 	dx /= max;
 	dy /= max;
