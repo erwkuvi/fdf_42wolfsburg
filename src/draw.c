@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:45:32 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/16 17:48:09 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 21:49:45 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,28 @@ int	max_val(float dx, float dy)
 	return ((int)dy);
 }
 
-void	bresenham_line(t_data *data, int color)
+void	bresenham_line(t_data *data)
 {
 	float	dx;
 	float	dy;
 	float	x_pos;
 	float	y_pos;
 	int		max;
-	double	percentage;
+	t_data	curr;
+
 
 	dx = data->x2 - data->x1;
 	dy = data->y2 - data->y1;
-
-	if (dx > dy)
-		percentage = percent(data->x1, data->x2, x_pos);
-	else
-		percentage = percent(data->y1, data->y2, y_pos);
-
 	max = max_val(mod(dx), mod(dy));
 	dx /= max;
 	dy /= max;
 	x_pos = data->x1;
 	y_pos = data->y1;
+	curr = *data;
 	while ((int)(x_pos - data->x2) || (int)(y_pos - data->y2))
 	{
 		img_pix_put(&data->img, (data->shift_x + (int)x_pos),
-			(data->shift_y + (int)y_pos), color);
+			(data->shift_y + (int)y_pos), get_color(curr, data, end, delta));
 		x_pos += dx;
 		y_pos += dy;
 	}
@@ -106,7 +102,7 @@ int	ft_draw(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 		data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	}
-	render_background(&data->img, EBONY);
+	render_background(&data->img, BLACK);
 	y = 0;
 	while (y < data->height)
 	{

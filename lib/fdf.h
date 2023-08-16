@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/16 17:16:02 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/16 21:28:56 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define GREY			0x808080
 # define BLUE			0x0000FF
 # define MAROON			0x800000
+# define BLACK			0x000000
 # define HEXADEC		16
 
 typedef struct s_img
@@ -88,6 +89,7 @@ int			atoi_base(char *str, int base);
 int			hextoint(const char *str);
 int			def_color(int map_value);
 int			hex_color(char *hex);
+int			get_color(t_data current, t_data start, t_data end, t_data delta);
 
 /* --------- utils.c ----------------- */
 int			ft_wordcount(char *s, char c);
@@ -100,10 +102,9 @@ void		ft_shift(t_data *data);
 void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 int			arraycmp(int *array, int current, int index);
-double		percent(int start, int end, int current);
 
 /* --------- draw.c ----------------- */
-void		bresenham_line(t_data *data, int color);
+void		bresenham_line(t_data *data);
 void		img_pix_put(t_img *img, int x, int y, int color);
 int			ft_draw(t_data *data);
 void		ft_zoom(t_data *data);
