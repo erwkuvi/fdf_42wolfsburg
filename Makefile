@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+         #
+#    By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 20:42:34 by ekuchel           #+#    #+#              #
-#    Updated: 2023/08/16 16:50:04 by ekuchel          ###   ########.fr        #
+#    Updated: 2023/08/17 18:43:10 by ekuchel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,12 @@ NAME = fdf
 
 SRC =	./src/main.c \
 		./src/utils.c \
-		./src/utils2.c \
 		./src/utils3.c \
-		./src/utils4.c \
+		./src/color.c \
 		./src/readfile.c \
 		./src/draw.c \
 		./src/isometric.c \
 		./src/hooks.c \
-		./src/atoi_base.c \
 
 # tester.c
 
@@ -29,7 +27,7 @@ LIBFT = ./lib/libft/libft.a
 
 LIBMLX = ./lib/minilibx_macos/libmlx.a
 
-CFLAGS = -Wall -Werror #-Wextra #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 RM = rm -rf
 CC = gcc -g
 

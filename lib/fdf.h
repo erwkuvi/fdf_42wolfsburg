@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/16 21:28:56 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 18:48:38 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,17 @@
 # define ARR_LEFT		0
 # define ARR_RIGHT		2
 
-# define COLOR1			0xFFFFFF
-# define COLOR2			0x808080
+# define BRICK_RED		0x003049
+# define FLAMINGO		0xEAE2B7
+# define DISCO			0xD62828 //red //0x40E0D0 //9A1F6A
+# define JAFFA			0xF77F00 // orange 0xEF8633
+# define SAFFRON		0xFCBF49 //Goldish//0x808080 //0xFFD700 //0xF3AF3D
 # define EBONY			0x555D50
 # define WHITE			0xFFFFFF
 # define GREY			0x808080
 # define BLUE			0x0000FF
 # define MAROON			0x800000
-# define BLACK			0x000000
-# define HEXADEC		16
+# define BACKGROUND		0x222222
 
 typedef struct s_img
 {
@@ -60,20 +62,20 @@ typedef struct s_data
 	int		height;
 	int		width;
 	int		**z_matrix;
+	int		z_min;
+	int		z_max;
 	int		x1;
 	int		y1;
 	int		x2;
 	int		y2;
 	int		shift_x;
 	int		shift_y;
-	// float	dx;
-	// float	dy;
 
 	float	zoom;
 	float	height_zoom;
-	int		color;
+	int		color1;
+	int		color2;
 	float	angle;
-	int		**color_matrix;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -85,20 +87,12 @@ void		readfile(char *filename, t_data *data);
 void		error_print(char *s);
 int			get_y(char *filename);
 int			get_x(char *filename, int y);
-int			atoi_base(char *str, int base);
-int			hextoint(const char *str);
-int			def_color(int map_value);
-int			hex_color(char *hex);
-int			get_color(t_data current, t_data start, t_data end, t_data delta);
+int			get_color(int dx, int dy, t_data *data);
 
 /* --------- utils.c ----------------- */
 int			ft_wordcount(char *s, char c);
-void		free_int_array(int **array);
-int			assign_color(int z);
-void		ft_zoom(t_data *data);
 void		initialize_mlx(t_data *data);
 void		initialize(t_data *data);
-void		ft_shift(t_data *data);
 void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 int			arraycmp(int *array, int current, int index);
@@ -107,41 +101,15 @@ int			arraycmp(int *array, int current, int index);
 void		bresenham_line(t_data *data);
 void		img_pix_put(t_img *img, int x, int y, int color);
 int			ft_draw(t_data *data);
-void		ft_zoom(t_data *data);
-void		ft_shift(t_data *data);
 void		render_background(t_img *img, int color);
+int			get_default_color(int z, t_data *data);
 
 /*--------- isometric.c --------------*/
 void		assign_val_x(t_data *data, int val1, int val2);
 void		assign_val_y(t_data *data, int val1, int val2);
 
 /*--------- hooks.c ----------------*/
-// void		free_ptr(void *ptr);
 int			deal_key(int key, t_data *data);
 int			close_win(t_data *data);
 
 #endif
-/*
------------- mlx_function usage --------------
-void *mlx_ptr;
-void *win_prt;
-
-mlx_ptr = mlx_init();
-win_prt = mlx_new_window(mlx_ptr, 1000, 1000, "FDF");
-
-mlx_pixel_put (mlx_ptr, win_ptr, (int)x, (int)y, #color);
-
-mlx_key_hook (win_ptr, deal_key, NULL);
-mlx_loop (mlx_ptr);
-
-------------- deal_key prototype ---------------
-int deal_key(int key, void *data);
-
------------------------------------------------
-colors:
-	white = 0xffffff
-	red = 0xe80сос
-------------------------------------------------
-frameworks:
--framework OpenGL -framework Appkit
-*/

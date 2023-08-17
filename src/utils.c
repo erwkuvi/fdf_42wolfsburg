@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:57:48 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/01 17:18:11 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 18:42:06 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
-
-void	free_int_array(int **array)
-{
-	int	i;
-
-	i = 0;
-	if (array)
-	{
-		while (array[i])
-			free(array[i++]);
-		free(array);
-	}
-}
 
 void	error_print(char *s)
 {
@@ -60,3 +47,14 @@ int	ft_wordcount(char *s, char c)
 	return (count);
 }
 
+int	arraycmp(int *array, int current, int index)
+{
+	if (!index)
+		return (0);
+	while (--index)
+	{
+		if (array[index] != current)
+			return (1);
+	}
+	return (0);
+}

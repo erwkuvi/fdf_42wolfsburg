@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:25:14 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/16 16:47:59 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 18:30:55 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ void	ft_allocation_matrices(t_data *data)
 	int	i;
 
 	i = 0;
-	printf("inside allocating matrices\n");
 	data->z_matrix = (int **)ft_calloc(data->height, sizeof(int *));
-	data->color_matrix = (int **)ft_calloc(data->height, sizeof(int));
-	if (!data->z_matrix || !data->color_matrix)
+	if (!data->z_matrix)
 		error_print("Matrix was not memory allocated");
 	while (i < data->height)
 	{
 		data->z_matrix[i] = (int *)ft_calloc(data->width, sizeof(int));
-		data->color_matrix[i] = (int *)ft_calloc(data->width, sizeof(int));
 		i++;
 	}
-
 }
 
 int	get_y(char *filename)
@@ -78,10 +74,9 @@ int	get_x(char *filename, int y)
 	return (counter);
 }
 
-void	populate_matrix(char *line, int	*line_matrix, int *color_matrix)
+void	populate_matrix(char *line, int	*line_matrix, t_data *data)
 {
 	int		i;
-	int		j;
 	char	**s_array;
 
 	i = 0;
@@ -89,13 +84,10 @@ void	populate_matrix(char *line, int	*line_matrix, int *color_matrix)
 	while (s_array[i])
 	{
 		line_matrix[i] = ft_atoi(s_array[i]);
-		j = 0;
-		while (s_array[i][j] != ',' && s_array[i][j])
-			j++;
-		if (s_array[i][j++] == ',')
-			color_matrix[i] = hextoint(&s_array[i][j]);
-		else
-			color_matrix[i] = def_color(line_matrix[i]);
+		if (line_matrix[i] > data->z_max)
+			data->z_max = line_matrix[i];
+		if (line_matrix[i] < data->z_min)
+			data->z_min = line_matrix[i];
 		free(s_array[i]);
 		i++;
 	}
@@ -112,14 +104,12 @@ void	readfile(char *filename, t_data *data)
 	if (fd < 0)
 		error_print("open did not work");
 	data->height = get_y(filename);
-	printf("Value of Y: %d\n", data->height);
 	data->width = get_x(filename, data->height);
-	printf("Value of X: %d\n", data->width);
 	ft_allocation_matrices(data);
 	i = 0;
 	while (get_next_line(fd, &line))
 	{
-		populate_matrix(line, data->z_matrix[i], data->color_matrix[i]);
+		populate_matrix(line, data->z_matrix[i], data);
 		free(line);
 		i++;
 	}

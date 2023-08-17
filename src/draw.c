@@ -6,48 +6,26 @@
 /*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:45:32 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/16 21:49:45 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 18:08:15 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-int	p_factor(int p, int dx, int dy, int *y)
+void	render_background(t_img *img, int color)
 {
-	if (p < 0)
-		return (2 * dy);
-	else
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIN_HEIGHT)
 	{
-		*y = *y + 1;
-		return ((2 * dy) - (2 * dx));
-	}
-}
-
-void	loop_y(t_data *data, int dx, int dy, int color)
-{
-	int	p;
-
-	// p = (2 * dx) - dy;
-	p = 0;
-	while (data->y1 <= data->y2)
-	{
-		p += p_factor(p, dy, dx, &data->x1);
-		img_pix_put(&data->img, (data->shift_x + data->x1),
-			(data->shift_y + data->y1++), color);
-
-	}
-}
-
-void	loop_x(t_data *data, int dx, int dy, int color)
-{
-	int	p;
-
-	p = 0;
-	while (data->x1 <= data->x2)
-	{
-		p += p_factor(p, dx, dy, &data->y1);
-		img_pix_put(&data->img, (data->shift_x + data->x1++),
-			(data->shift_y + data->y1), color);
+		j = 0;
+		while (j < WIN_WIDTH)
+		{
+			img_pix_put(img, j++, i, color);
+		}
+		++i;
 	}
 }
 
@@ -72,8 +50,6 @@ void	bresenham_line(t_data *data)
 	float	x_pos;
 	float	y_pos;
 	int		max;
-	t_data	curr;
-
 
 	dx = data->x2 - data->x1;
 	dy = data->y2 - data->y1;
@@ -82,11 +58,10 @@ void	bresenham_line(t_data *data)
 	dy /= max;
 	x_pos = data->x1;
 	y_pos = data->y1;
-	curr = *data;
 	while ((int)(x_pos - data->x2) || (int)(y_pos - data->y2))
 	{
 		img_pix_put(&data->img, (data->shift_x + (int)x_pos),
-			(data->shift_y + (int)y_pos), get_color(curr, data, end, delta));
+			(data->shift_y + (int)y_pos), get_color(dx, dy, data));
 		x_pos += dx;
 		y_pos += dy;
 	}
@@ -97,12 +72,7 @@ int	ft_draw(t_data *data)
 	int	y;
 	int	x;
 
-	if (data->img.img_ptr)
-	{
-		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-		data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	}
-	render_background(&data->img, BLACK);
+	render_background(&data->img, BACKGROUND);
 	y = 0;
 	while (y < data->height)
 	{

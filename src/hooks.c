@@ -6,13 +6,13 @@
 /*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:38:30 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/12 21:56:02 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 19:09:38 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-void deal_shift(int	key, t_data *data)
+void	deal_shift(int key, t_data *data)
 {
 	if (key == UP)
 		data->shift_y -= 10;
@@ -22,6 +22,9 @@ void deal_shift(int	key, t_data *data)
 		data->shift_x -= 10;
 	else if (key == RIGHT)
 		data->shift_x += 10;
+	printf("Shift_y: %d\n", data->shift_y);
+	printf("Shift_x: %d\n", data->shift_x);
+	/*shift_y minimum : 8*/
 	ft_draw(data);
 }
 
@@ -43,7 +46,7 @@ void	deal_zoom(int key, t_data *data)
 
 void	deal_key_rotation(int key, t_data *data)
 {
-	if (data->angle < 1.543598)
+	if (data->angle < 1)
 	{
 		if (key == ARR_LEFT)
 		data->angle += 0.03;
@@ -53,7 +56,6 @@ void	deal_key_rotation(int key, t_data *data)
 		if (key == ARR_RIGHT)
 			data->angle -= 0.03;
 	}
-	printf("Value of angle %f\n", data->angle);
 	ft_draw(data);
 }
 
@@ -63,10 +65,24 @@ int	deal_key(int key, t_data *data)
 		deal_shift (key, data);
 	else if (key == KY_ESC)
 		close_win(data);
-	else if (key == ARR_UP || key == ARR_DOWN || key == HEIGHTUP || key == HEIGHTDOWN)
+	else if (key == ARR_UP || key == ARR_DOWN || key == HEIGHTUP
+		|| key == HEIGHTDOWN)
 		deal_zoom(key, data);
-	else if (key == ARR_LEFT || key == ARR_RIGHT )
+	else if (key == ARR_LEFT || key == ARR_RIGHT)
 		deal_key_rotation(key, data);
 	return (0);
 }
 
+int	close_win(t_data *data)
+{
+	if (data->img.img_ptr)
+		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+		free(data->mlx_ptr);
+	if (data->z_matrix)
+		free(data->z_matrix);
+	free(data);
+	exit(0);
+}

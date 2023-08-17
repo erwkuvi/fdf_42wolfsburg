@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 18:33:37 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/16 17:12:20 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 19:44:11 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
-
-int	noevent(void)
-{
-	return (0);
-}
 
 void	ft_fdf(char *argv)
 {
@@ -23,39 +18,34 @@ void	ft_fdf(char *argv)
 
 	data = (t_data *)malloc(sizeof(t_data));
 	readfile(argv, data);
-	initialize_mlx(data);
-	initialize(data);
-	// printf("Render BG\n");
-	render_background(&data->img, EBONY);
-
-	ft_draw(data);
-	// // mlx_loop_hook(data->mlx_ptr, ft_draw, data);
-	// // mlx_key_hook(data->win_ptr, deal_key, data);
-	// // mlx_loop_hook(data->mlx_ptr, &close_win, data);
-	// printf("MLX HOOK\n");
-	mlx_hook(data->win_ptr, KEY_PRESS, 0, &deal_key, data);
-	mlx_hook(data->win_ptr, WINDOW_CLOSE, 0, &close_win, data);
-	// printf("after MLX_HOOK\n");
-	// // mlx_hook(data->win_ptr, 4, 0, &mouse_press, data);
-	// //int mlx_hook(void *win_ptr, int x_event, int x_mask, int (*funct)(), void *param);
-	mlx_loop(data->mlx_ptr);
-	// printf("AFTERLOOP_________");
+	data->z_max = 15;
+	data->z_min = 0;
+	data->color1 = get_default_color(0, data);
+	printf("Color1: %08X\n", data->color1);
+	data->color2 = get_default_color(15, data);
+	printf("Color2: %08X\n", data->color2);
+	data->x1 = 5;
+	data->x2 = 8;
+	data->y1 = 2;
+	data->y2 = 5;
+	int printed_c = get_color(5, 4, data);
+	printf("Printed color: %08X\n", printed_c);
+	// initialize_mlx(data);
+	// initialize(data);
+	// ft_draw(data);
+	// mlx_hook(data->win_ptr, KEY_PRESS, 0, deal_key, data);
+	// mlx_hook(data->win_ptr, WINDOW_CLOSE, 0, close_win, data);
+	// mlx_loop(data->mlx_ptr);
 }
 
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		ft_putstr_fd("Correct argument is needed\n", 2);
+		ft_putstr_fd("Wrong arguments\n", 2);
 		return (1);
 	}
 	ft_fdf(argv[1]);
-	// printf("atoi_base = %d\n", hextoint("FF0000"));
-	printf("Blue = %d\n", hextoint("0x0000FF"));
-	printf("MAROON= %d\n", hex_color("0x800000"));
-	printf("hex to int= %d\n", atoi_base("0xFF0000", HEXADEC));
-	printf("0 - '0'= %d\n", '9' - 48);
-	printf("'C' - 55= %d\n", 'C' - 55); //7
-	printf("'c' - 87= %d\n", 'c' - 87); //W
 	return (0);
 }
+
