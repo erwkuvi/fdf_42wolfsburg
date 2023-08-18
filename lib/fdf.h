@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/17 18:48:38 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 13:08:06 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@
 # define ARR_LEFT		0
 # define ARR_RIGHT		2
 
-# define BRICK_RED		0x003049
-# define FLAMINGO		0xEAE2B7
-# define DISCO			0xD62828 //red //0x40E0D0 //9A1F6A
-# define JAFFA			0xF77F00 // orange 0xEF8633
-# define SAFFRON		0xFCBF49 //Goldish//0x808080 //0xFFD700 //0xF3AF3D
+# define BRICK_RED		0xFF5400
+# define FLAMINGO		0xFF5400
+# define DISCO			0x9E0059
+# define JAFFA			0xFF5400
+# define SAFFRON		0xFFBD00
 # define EBONY			0x555D50
 # define WHITE			0xFFFFFF
 # define GREY			0x808080
@@ -96,6 +96,7 @@ void		initialize(t_data *data);
 void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 int			arraycmp(int *array, int current, int index);
+int			check_dir(char *filename);
 
 /* --------- draw.c ----------------- */
 void		bresenham_line(t_data *data);

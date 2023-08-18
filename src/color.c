@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:37:05 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/17 19:44:59 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 12:57:38 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
-	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(int *)pixel = color;
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+	{
+		pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+		*(int *)pixel = color;
+	}
 }
 
 double	percent(int start, int end, int current)
@@ -40,8 +43,8 @@ int	get_default_color(int z, t_data *data)
 
 	z_min = data->z_min;
 	z_max = data->z_max;
-	// z_min *= data->height_zoom;
-	// z_max *= data->height_zoom;
+	z_min *= data->height_zoom;
+	z_max *= data->height_zoom;
 	percentage = percent(z_min, z_max, z);
 	if (percentage < 0.2)
 		return (DISCO);
@@ -70,13 +73,13 @@ int	get_color(int dx, int dy, t_data *data)
 	if (data->color1 == data->color2)
 		return (data->color1);
 	if (dx > dy)
-		percentage = percent(data->x1, data->x2, data->x1);
+		percentage = percent(data->x1, data->x2, data->x2);
 	else
-		percentage = percent(data->y1, data->y2, data->y1);
-	red = get_light((data->color1 >> 16) & 0xFF,
+		percentage = percent(data->y1, data->y2, data->y2);
+	red = get_light((data->color1 >> 24) & 0xFF,
+			(data->color2 >> 24) & 0xFF, percentage);
+	green = get_light((data->color2 >> 16) & 0xFF,
 			(data->color2 >> 16) & 0xFF, percentage);
-	green = get_light((data->color2 >> 8) & 0xFF,
-			(data->color2 >> 8) & 0xFF, percentage);
 	blue = get_light(data->color1 & 0xFF, data->color2 & 0xFF, percentage);
 	return ((red << 16) | (green << 8) | blue);
 }

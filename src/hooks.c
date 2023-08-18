@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:38:30 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/17 19:09:38 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 13:06:18 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	deal_shift(int key, t_data *data)
 		data->shift_x -= 10;
 	else if (key == RIGHT)
 		data->shift_x += 10;
-	printf("Shift_y: %d\n", data->shift_y);
-	printf("Shift_x: %d\n", data->shift_x);
 	/*shift_y minimum : 8*/
 	ft_draw(data);
 }
@@ -49,7 +47,7 @@ void	deal_key_rotation(int key, t_data *data)
 	if (data->angle < 1)
 	{
 		if (key == ARR_LEFT)
-		data->angle += 0.03;
+			data->angle += 0.03;
 	}
 	if (data->angle > -1.2)
 	{

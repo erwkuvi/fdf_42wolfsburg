@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:25:14 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/17 18:30:55 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 11:56:34 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	readfile(char *filename, t_data *data)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || check_dir(filename))
 		error_print("open did not work");
 	data->height = get_y(filename);
 	data->width = get_x(filename, data->height);

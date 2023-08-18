@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:57:48 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/17 18:42:06 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 11:54:29 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,20 @@ int	arraycmp(int *array, int current, int index)
 		if (array[index] != current)
 			return (1);
 	}
+	return (0);
+}
+
+int	check_dir(char *filename)
+{
+	int		nb;
+	int		fd;
+	char	*buf;
+
+	fd = open(filename, O_RDONLY);
+	buf = malloc(sizeof(char));
+	nb = read(fd, buf, 1);
+	if (nb <= 0)
+		return (1);
+	free(buf);
 	return (0);
 }
