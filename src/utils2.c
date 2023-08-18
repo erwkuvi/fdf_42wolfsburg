@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 18:53:11 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/17 18:40:04 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 18:13:32 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	min_max_z(t_data *data)
 
 void	initialize(t_data *data)
 {
-	data->zoom = WIN_HEIGHT / data->height / 4;
+	data->zoom = (float)WIN_HEIGHT / (float)data->height / (float)4;
 	if (data->zoom <= 0)
 		error_print("Error while calculating zoom!");
 	data->height_zoom = 3;
@@ -66,4 +66,17 @@ void	initialize(t_data *data)
 	if (data->shift_x < 0 || data->shift_y < 0)
 		error_print("Error while calculating shift!");
 	min_max_z(data);
+}
+
+void	free_intarray(int **array, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->height)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

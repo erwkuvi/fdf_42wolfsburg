@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 09:51:07 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/18 13:08:06 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 18:10:10 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void		assign_val_x(t_data *data, int x, int y);
 void		assign_val_y(t_data *data, int x, int y);
 int			arraycmp(int *array, int current, int index);
 int			check_dir(char *filename);
+void		free_intarray(int **array, t_data *data);
 
 /* --------- draw.c ----------------- */
 void		bresenham_line(t_data *data);

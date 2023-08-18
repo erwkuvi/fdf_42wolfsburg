@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+         #
+#    By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 20:42:34 by ekuchel           #+#    #+#              #
-#    Updated: 2023/08/17 18:43:10 by ekuchel          ###   ########.fr        #
+#    Updated: 2023/08/18 18:11:19 by ekuchel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 SRC =	./src/main.c \
 		./src/utils.c \
-		./src/utils3.c \
+		./src/utils2.c \
 		./src/color.c \
 		./src/readfile.c \
 		./src/draw.c \
@@ -27,7 +27,7 @@ LIBFT = ./lib/libft/libft.a
 
 LIBMLX = ./lib/minilibx_macos/libmlx.a
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address
 RM = rm -rf
 CC = gcc -g
 

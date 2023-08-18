@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 12:38:30 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/18 13:06:18 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 18:13:04 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	deal_shift(int key, t_data *data)
 		data->shift_x -= 10;
 	else if (key == RIGHT)
 		data->shift_x += 10;
-	/*shift_y minimum : 8*/
 	ft_draw(data);
 }
 
@@ -77,10 +76,8 @@ int	close_win(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (data->mlx_ptr)
-		free(data->mlx_ptr);
 	if (data->z_matrix)
-		free(data->z_matrix);
+		free_intarray(data->z_matrix, data);
 	free(data);
 	exit(0);
 }
