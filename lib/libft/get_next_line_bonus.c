@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 16:41:08 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/07/19 14:18:57 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:37:23 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ char	*ft_new_strholder(char *strholder)
 
 int	get_next_line(int fd, char **line)
 {
-	// char		*line;
 	static char	*strholder[400];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:25:14 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/18 11:56:34 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/21 16:29:21 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	populate_matrix(char *line, int	*line_matrix, t_data *data)
 	s_array = ft_split(line, ' ');
 	while (s_array[i])
 	{
+		if (!ft_isdigit(s_array[i][0]))
+			error_print("Wrong input");
 		line_matrix[i] = ft_atoi(s_array[i]);
 		if (line_matrix[i] > data->z_max)
 			data->z_max = line_matrix[i];
