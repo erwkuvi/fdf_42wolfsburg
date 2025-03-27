@@ -3,69 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ekuchel <ekuchel@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 17:44:05 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/04 18:24:22 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/17 17:24:08 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-static int	x_isometric(int x, int y, t_data *data)
+static int	x_isometric(float x, float y, t_data *data)
 {
-	return ((x - y) * cos(data->anglex));
+	return ((x - y) * cos(data->angle));
 }
 
 static int	y_isometric(int x, int y, int z, t_data *data)
 {
-	return ((x + y) * sin(data->angley) - z);
+	return ((x + y) * sin(data->angle) - z);
 }
 
-// void	isometric(int *x, int *y, int z, t_data *data)
-// {
-// 	int	previous_x;
-// 	int	previous_y;
-
-// 	previous_x = *x;
-// 	previous_y = *y;
-// 	*x = (previous_x - previous_y) * cos(data->anglex);
-// 	*y = (previous_x + previous_y) * sin(data->angley) - z;
-// }
-
-void	assign_val_x(t_data *data, int x, int y)
+void	assign_val_x(t_data *data, int x1, int y1)
 {
-	int		x1;
-	int		y1;
-	int		z;
+	int		x2;
+	int		y2;
 	int		z1;
-	int		color;
+	int		z2;
 
-	x1 = x + 1;
-	y1 = y;
-	z = data->z_matrix[y][x];
+	x2 = x1 + 1;
+	y2 = y1;
 	z1 = data->z_matrix[y1][x1];
-	color = data->color_matrix[y][x];
-	x *= data->zoom;
-	y *= data->zoom;
+	z2 = data->z_matrix[y2][x2];
 	x1 *= data->zoom;
 	y1 *= data->zoom;
-	z *= data->height_zoom;
+	x2 *= data->zoom;
+	y2 *= data->zoom;
 	z1 *= data->height_zoom;
-	data->x1 = x_isometric(x, y, data);
-	data->x2 = x_isometric(data->x1, y1, data);
-	data->y1 = y_isometric(data->x1, y, z, data);
-	data->y2 = y_isometric(data->x2, y1, z1, data);
-	bresen_algo(data, color);
+	z2 *= data->height_zoom;
+	data->x1 = x_isometric(x1, y1, data);
+	data->y1 = y_isometric(data->x1, y1, z1, data);
+	data->x2 = x_isometric(x2, y2, data);
+	data->y2 = y_isometric(data->x2, y2, z2, data);
+	data->color1 = get_default_color(z1, data);
+	data->color2 = get_default_color(z2, data);
+	bresenham_line(data);
 }
 
-void	assign_val_y(t_data *data, int x, int y)
+void	assign_val_y(t_data *data, int x1, int y1)
 {
-	int	color;
+	int		x2;
+	int		y2;
+	int		z1;
+	int		z2;
 
-	data->x1 = x;
-	data->x2 = x;
-	data->y1 = y;
-	data->y2 = y + 1;
-	bresen_algo(data, color);
+	x2 = x1;
+	y2 = y1 + 1;
+	z1 = data->z_matrix[y1][x1];
+	z2 = data->z_matrix[y2][x2];
+	x1 *= data->zoom;
+	y1 *= data->zoom;
+	x2 *= data->zoom;
+	y2 *= data->zoom;
+	z1 *= data->height_zoom;
+	z2 *= data->height_zoom;
+	data->x1 = x_isometric(x1, y1, data);
+	data->y1 = y_isometric(data->x1, y1, z1, data);
+	data->x2 = x_isometric(x2, y2, data);
+	data->y2 = y_isometric(data->x2, y2, z2, data);
+	data->color1 = get_default_color(z1, data);
+	data->color2 = get_default_color(z2, data);
+	bresenham_line(data);
 }

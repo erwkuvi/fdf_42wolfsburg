@@ -6,7 +6,7 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:13:02 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/03/03 16:44:05 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:23:22 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ wise, the argument is returned unchanged.*/
 int	ft_tolower(int c)
 {
 	if ((c >= 65) && (c <= 90))
-	{
 		c += 32;
-		return (c);
-	}
 	return (c);
 }

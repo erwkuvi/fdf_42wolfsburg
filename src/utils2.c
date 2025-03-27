@@ -5,41 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 16:37:05 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/04 17:53:20 by ekuchel          ###   ########.fr       */
+/*   Created: 2023/07/28 18:53:11 by ekuchel           #+#    #+#             */
+/*   Updated: 2023/08/18 18:13:32 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
 
-void	img_pix_put(t_img *img, int x, int y, int color)
+void	initialize_mlx(t_data *data)
 {
-	char	*pixel;
-
-	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(int *)pixel = color;
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
+		exit(MLX_ERROR);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FDF");
+	if (data->win_ptr == NULL)
+	{
+		free(data->win_ptr);
+		exit(MLX_ERROR);
+	}
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
+			&data->img.line_length, &data->img.endian);
 }
 
-void	ft_zoom(t_data *data)
+void	min_max_z(t_data *data)
 {
-	data->x1 *= data->zoom;
-	data->y1 *= data->zoom;
-	data->x2 *= data->zoom;
-	data->y2 *= data->zoom;
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	data->z_min = data->z_matrix[i][j];
+	data->z_max = data->z_matrix[i][j];
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			if (data->z_matrix[i][j] < data->z_min)
+				data->z_min = data->z_matrix[i][j];
+			if (data->z_matrix[i][j] > data->z_max)
+				data->z_max = data->z_matrix[i][j];
+			j++;
+		}
+		i++;
+	}
 }
 
-int	assign_color(int z)
+void	initialize(t_data *data)
 {
-	if (z > 0)
-		return (0xFF5733);
-	return (0xFFFFFF);
+	data->zoom = (float)WIN_HEIGHT / (float)data->height / (float)4;
+	if (data->zoom <= 0)
+		error_print("Error while calculating zoom!");
+	data->height_zoom = 3;
+	data->color1 = WHITE;
+	data->color2 = WHITE;
+	data->angle = 0.523599;
+	data->shift_x = (WIN_WIDTH / 2) - (data->width * data->zoom) / 2;
+	data->shift_y = (WIN_HEIGHT / 2) - (data->height * data->zoom) / 2;
+	if (data->shift_x < 0 || data->shift_y < 0)
+		error_print("Error while calculating shift!");
+	min_max_z(data);
 }
 
-void	ft_shift(t_data *data)
+void	free_intarray(int **array, t_data *data)
 {
-	data->x1 += data->shift_x;
-	data->y1 += data->shift_y;
-	data->x2 += data->shift_x;
-	data->y2 += data->shift_y;
-}
+	int	i;
 
+	i = 0;
+	while (i < data->height)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}

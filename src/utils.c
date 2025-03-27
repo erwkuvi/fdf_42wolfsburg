@@ -6,24 +6,11 @@
 /*   By: ekuchel <ekuchel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 17:57:48 by ekuchel           #+#    #+#             */
-/*   Updated: 2023/08/01 17:18:11 by ekuchel          ###   ########.fr       */
+/*   Updated: 2023/08/18 11:54:29 by ekuchel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fdf.h"
-
-void	free_int_array(int **array)
-{
-	int	i;
-
-	i = 0;
-	if (array)
-	{
-		while (array[i])
-			free(array[i++]);
-		free(array);
-	}
-}
 
 void	error_print(char *s)
 {
@@ -60,3 +47,29 @@ int	ft_wordcount(char *s, char c)
 	return (count);
 }
 
+int	arraycmp(int *array, int current, int index)
+{
+	if (!index)
+		return (0);
+	while (--index)
+	{
+		if (array[index] != current)
+			return (1);
+	}
+	return (0);
+}
+
+int	check_dir(char *filename)
+{
+	int		nb;
+	int		fd;
+	char	*buf;
+
+	fd = open(filename, O_RDONLY);
+	buf = malloc(sizeof(char));
+	nb = read(fd, buf, 1);
+	if (nb <= 0)
+		return (1);
+	free(buf);
+	return (0);
+}
