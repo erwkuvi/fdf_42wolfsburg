@@ -5,12 +5,12 @@
 
 ## **Project Goal**  
 The goal of **FdF** is to create a program that:  
-- ✔ **Reads a heightmap file** containing (x, y, z) coordinates.  
-- ✔ **Converts 3D coordinates into a 2D isometric projection**.  
-- ✔ **Renders the map as a wireframe**, connecting points with lines.  
-- ✔ **Allows user interactions** such as rotation, zooming, and movement.  
-- ✔ **Handles elevation levels** to create realistic height variations.  
-- ✔ **Supports optional color gradients** for better visualization.  
+- **Reads a heightmap file** containing (x, y, z) coordinates.  
+- **Converts 3D coordinates into a 2D isometric projection**.  
+- **Renders the map as a wireframe**, connecting points with lines.  
+- **Allows user interactions** such as rotation, zooming, and movement.  
+- **Handles elevation levels** to create realistic height variations.  
+- **Supports optional color gradients** for better visualization.  
 
 This is achieved using **MiniLibX**, a lightweight graphics library for macOS/Linux.  
 
